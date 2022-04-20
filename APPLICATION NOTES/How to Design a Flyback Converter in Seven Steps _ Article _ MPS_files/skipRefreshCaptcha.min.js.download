@@ -1,0 +1,1 @@
+define(['ko'],function(ko){'use strict';return{skip:ko.observable(false)};});

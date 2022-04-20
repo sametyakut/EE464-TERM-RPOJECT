@@ -1,0 +1,3 @@
+define(['uiComponent','Magento_Customer/js/customer-data','jquery','mage/mage','mage/decorate'],function(Component,customerData,$){'use strict';var sidebarInitialized=false;function initSidebar(){if(sidebarInitialized){return;}
+sidebarInitialized=true;$('[data-role=compare-products-sidebar]').decorate('list',true);}
+return Component.extend({initialize:function(){this._super();this.compareProducts=customerData.get('compare-products');initSidebar();}});});

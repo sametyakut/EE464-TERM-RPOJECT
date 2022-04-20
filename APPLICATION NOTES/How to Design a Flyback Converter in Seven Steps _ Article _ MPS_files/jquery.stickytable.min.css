@@ -1,0 +1,28 @@
+.sticky-table {
+    max-width: 100%;
+    max-height: 662px;
+    overflow: auto;
+    padding: 0;
+}
+.sticky-table table {
+    margin-bottom: 0;
+    border-spacing: 0;
+    padding: 0 !important;
+    border-collapse: inherit;
+        overflow: hidden;
+}
+.sticky-table table tr.sticky-row th, .sticky-table table tr.sticky-row td {
+    position: relative;
+    z-index: 5;
+    border-right: 1px solid #d6d9e0 !important;
+}
+.sticky-table table td.sticky-cell, .sticky-table table th.sticky-cell {
+    position: relative;
+    z-index: 10;
+}
+.sticky-table table tr.sticky-row td.sticky-cell, .sticky-table table tr.sticky-row th.sticky-cell {
+    z-index: 21;
+}
+.table:not(.cart):not(.totals) > thead > tr > th, .table:not(.cart):not(.totals) > thead > tr > td {
+    border-bottom: 1px solid #d6d9e0;
+}
