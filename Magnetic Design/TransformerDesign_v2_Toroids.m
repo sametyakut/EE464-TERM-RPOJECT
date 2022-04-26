@@ -79,7 +79,7 @@ for i = 1:length(Perm)
 end
 
 %% COMMENTS
-% If there is no mistake, the third core (0077442A7) will be suitable
+% If there is no mistake, the second core (0077442A7) will be suitable
 % for us to use. Manually, I calculated iterations, and I saw
 % that it suits for us.
 % Note that turns ratio is selected as 1 in order to operate as a buck
