@@ -21,7 +21,7 @@ Iin = Pout/Vin;
 D = Vout/(Vout+n*Vin); % Duty cycle
 % For CCM, DeltaIL<Iin
 Lm_min = Vin*D*fs^-1/Iin;
-Lm = Lm_min*10; % can be changed to adjust current ripple
+Lm = Lm_min*1.5; % can be changed to adjust current ripple
 DeltaIL = Vin*D*fs^-1/Lm; % Magnetizing Inductance Current Ripple
 Imax = Iin+DeltaIL;
 CopperCross = 1e-6*Imax/4;% since J = 4 A/mm^2, m^2:
@@ -61,7 +61,7 @@ Iin = Pout/Vin;
 D = Vout/(Vout+n*Vin); % Duty cycle
 % For CCM, DeltaIL<Iin
 Lm_min = Vin*D*fs^-1/Iin;
-Lm = Lm_min*10; % can be changed to adjust current ripple
+Lm = Lm_min*1.5; % can be changed to adjust current ripple, I chose this according to the TI's Application Note
 DeltaIL = Vin*D*fs^-1/Lm; % Magnetizing Inductance Current Ripple
 Imax = Iin+DeltaIL;
 CopperRadius = 0.5e-3; % insert the value found in previous part for convenience!!!!!!!!!!!
