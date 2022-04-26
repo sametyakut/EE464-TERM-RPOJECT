@@ -29,7 +29,7 @@ CopperRadius = sqrt(Imax/(4*pi)); % wire selection
 
 for i = 1:length(Perm)
     Npri(i) = sqrt(Lm/(AL(i)));
-    Acu(i) = 3*Npri(i)*CopperCross; % Total copper area
+    Acu(i) = 2*Npri(i)*CopperCross; % Total copper area
     kf(i) = Acu(i)/Aw(i); % fill factor
     reluc(i) = Le(i)/(mu0*Perm(i)*Ae(i)); % reluctance of the core without gap
     phi(i) = Npri(i)*Imax/reluc(i); % maximum flux in the core
@@ -69,7 +69,7 @@ CopperCross = CopperRadius^2*pi;% since J = 4 A/mm^2, m^2:
 
 for i = 1:length(Perm)
     Npri(i) = sqrt(Lm/(AL(i)));
-    Acu(i) = 3*Npri(i)*CopperCross; % Total copper area
+    Acu(i) = 2*Npri(i)*CopperCross; % Total copper area
     kf(i) = Acu(i)/Aw(i); % fill factor
     reluc(i) = Le(i)/(mu0*Perm(i)*Ae(i)); % reluctance of the core without gap
     phi(i) = Npri(i)*Imax/reluc(i); % maximum flux in the core
