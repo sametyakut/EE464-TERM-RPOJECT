@@ -24,12 +24,13 @@ Lm_min = Vin*D*fs^-1/Iin;
 Lm = Lm_min*1.5; % can be changed to adjust current ripple
 DeltaIL = Vin*D*fs^-1/Lm; % Magnetizing Inductance Current Ripple
 Imax = Iin+DeltaIL;
-CopperCross = 1e-6*Imax/4;% since J = 4 A/mm^2, m^2:
+CopperCross = 1e-6; % cable available in the laboratory
 CopperRadius = sqrt(Imax/(4*pi)); % wire selection
 
 
 for i = 1:length(Perm)
     Npri(i) = sqrt(Lm/(AL(i)));
+    Npri(i) = ceil(Npri(i));
     Acu(i) = 2*Npri(i)*CopperCross; % Total copper area
     kf(i) = Acu(i)/Aw(i); % fill factor
     reluc(i) = Le(i)/(mu0*Perm(i)*Ae(i)); % reluctance of the core without gap
@@ -64,13 +65,12 @@ Lm_min = Vin*D*fs^-1/Iin;
 Lm = Lm_min*1.5; % can be changed to adjust current ripple, I chose this according to the TI's Application Note
 DeltaIL = Vin*D*fs^-1/Lm; % Magnetizing Inductance Current Ripple
 Imax = Iin+DeltaIL;
-CopperRadius = 0.5e-3; % insert the value found in previous part for convenience!!!!!!!!!!!
-CopperCross = CopperRadius^2*pi;% since J = 4 A/mm^2, m^2:
-
+CopperCross = 1e-6; % Cable available in the laboratory
 
 
 for i = 1:length(Perm)
     Npri(i) = sqrt(Lm/(AL(i)));
+    Npri(i) = ceil(Npri(i));
     Acu(i) = 2*Npri(i)*CopperCross; % Total copper area
     kf(i) = Acu(i)/Aw(i); % fill factor
     reluc(i) = Le(i)/(mu0*Perm(i)*Ae(i)); % reluctance of the core without gap
