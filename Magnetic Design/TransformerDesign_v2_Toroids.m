@@ -8,7 +8,7 @@ Vin = 24; % or 48 V
 Vout = 15; % V, fixed
 Pout = 45; % W, fixed
 n = 1; % N1:N2, for operating only as a buck converter
-fs = 60e3; % switching frequency
+fs = 100e3; % switching frequency
 Perm = [160 90 26 125 60 60 60 81 59 75]; % relative permittivity, same order with the excel sheet on github
 AL = 1e-9*[201 202 33 90 135 75 138 81 59 75]; % H/turn^2, same order with the excel sheet on github
 Aw = 1e-6*[156 427 948 139 427 156 514 427 427 156]; % m^2
@@ -20,7 +20,7 @@ Iout = Pout/Vout;
 Iin = Pout/Vin;
 D = Vout/(Vout+n*Vin); % Duty cycle
 % For CCM, DeltaIL<Iin
-Lm_min = Vin*D*fs^-1/Iin;
+Lm_min = Vin*D*fs^-1/(Iin/D);
 Lm = Lm_min*1.5; % can be changed to adjust current ripple
 DeltaIL = Vin*D*fs^-1/Lm; % Magnetizing Inductance Current Ripple
 Imax = Iin+DeltaIL;
@@ -48,7 +48,7 @@ Vin = 48; % or 48 V
 Vout = 15; % V, fixed
 Pout = 45; % W, fixed
 n = 1; % N1:N2, for operating only as a buck converter
-fs = 60e3; % switching frequency
+fs = 100e3; % switching frequency
 Perm = [160 90 26 125 60 60 60 81 59 75]; % relative permittivity, same order with the excel sheet on github
 AL = 1e-9*[201 202 33 90 135 75 138 81 59 75]; % H/turn^2, same order with the excel sheet on github
 Aw = 1e-6*[156 427 948 139 427 156 514 427 427 156]; % m^2
@@ -57,21 +57,23 @@ Ae = 1e-6*[65.4 199 144 31.7 199 65.4 229 107 199 64.5]; % m^2, crossection of t
 mu0 = 4*pi*10^-7; % permittivity of the air
 
 
+
 Iout = Pout/Vout;
 Iin = Pout/Vin;
 D = Vout/(Vout+n*Vin); % Duty cycle
+Il_avg = Iin/D;
 % For CCM, DeltaIL<Iin
-Lm_min = Vin*D*fs^-1/Iin;
+Lm_min = Vin*D*fs^-1/(Iin/D);
 Lm = Lm_min*1.5; % can be changed to adjust current ripple, I chose this according to the TI's Application Note
 DeltaIL = Vin*D*fs^-1/Lm; % Magnetizing Inductance Current Ripple
-Imax = Iin+DeltaIL;
-CopperCross = 1e-6; % Cable available in the laboratory
+Imax = Il_avg+DeltaIL;
+CopperCross = pi*(0.5*0.425e-3)^2; % Cable available in the laboratory
 
 
 for i = 1:length(Perm)
     Npri(i) = sqrt(Lm/(AL(i)));
     Npri(i) = ceil(Npri(i));
-    Acu(i) = 2*Npri(i)*CopperCross; % Total copper area
+    Acu(i) = 12*Npri(i)*CopperCross; % Total copper area
     kf(i) = Acu(i)/Aw(i); % fill factor
     reluc(i) = Le(i)/(mu0*Perm(i)*Ae(i)); % reluctance of the core without gap
     phi(i) = Npri(i)*Imax/reluc(i); % maximum flux in the core
