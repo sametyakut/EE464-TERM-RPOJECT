@@ -106,3 +106,36 @@ DeltaB = B_max-B_min;
 Aw = 8.65e-3*14.8e-3*4;
 kf = 22*CopperCross*Npri/Aw;
 
+%% Core Loss & Copper Loss
+% Core loss is calculated by means of Magnetics' P Material datasheet.
+% Making a curve fit for losses in 50 kHz gives CoreLossDensity (mW/cm^3) =
+% 5*DeltaB - 25.
+clear all
+close all
+clc
+
+% initials
+DeltaB = 0.0892;
+Pri_par = 10;
+Sec_par = 12;
+N = 12;
+pcu = 1.72e-8;
+Acu = pi*(0.5*0.425e-3)^2; 
+MLT = pi*20.85e-3; % m
+DeltaB = DeltaB * 100;
+Dens = 5*DeltaB - 25; %mW/cm^3
+Vol = 22.7; %cm^3
+Ipri_rms = 3.98; %A
+Isec_rms = 5.1; %A
+
+Pcore = Dens * Vol/1000; % W
+
+Rcu_pri = pcu*MLT*N/Acu;
+Rcu_pri = Rcu_pri/Pri_par;
+Rcu_sec = Rcu_pri/Sec_par;
+
+Pcopper = Ipri_rms^2 * Rcu_pri + Isec_rms^2 * Rcu_sec; % W
+
+Ptotal = Pcopper + Pcore;
+
+
