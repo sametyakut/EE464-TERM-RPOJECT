@@ -138,4 +138,6 @@ Pcopper = Ipri_rms^2 * Rcu_pri + Isec_rms^2 * Rcu_sec; % W
 
 Ptotal = Pcopper + Pcore;
 
+%% Snubber Design
+
 
