@@ -24,7 +24,7 @@ D = Vout/(Vout+n*Vin); % Duty cycle
 
 
 %Ilm_avg = n^-1*(1-D)^-1*Iout;
-Ilm_avg = Iin/D;
+Ilm_avg = Iout*n/(1-D);
 
 % For CCM, DeltaIL/2<Ilm,avg
 Lm_min = Vin*D*fs^-1/(2*Ilm_avg);
@@ -51,6 +51,8 @@ B_max = Npri*Imax/(R*Ae);
 DeltaB = B_max-B_min;
 Aw = 8.65e-3*14.8e-3*4;
 kf = 22*CopperCross*Npri/Aw;
+
+V_sw = Vin/(1-D);
 %%
 % Analytic Model of the Flyback Converter and Magnetic Design
 clear all
@@ -78,7 +80,7 @@ D = Vout/(Vout+n*Vin); % Duty cycle
 
 
 %Ilm_avg = n^-1*(1-D)^-1*Iout;
-Ilm_avg = Iin/D;
+Ilm_avg = Iout*n/(1-D);
 
 % For CCM, DeltaIL/2<Ilm,avg
 Lm_min = Vin*D*fs^-1/(2*Ilm_avg);
